@@ -1,20 +1,25 @@
 package se.lexicon.marek.booklender.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
 public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private long loanId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @Column(nullable = false)
     private LibraryUser loanTaker;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @Column(nullable = false)
     private Book book;
+    @Column(nullable = false)
     private LocalDate loanDate;
+    @Column(nullable = false)
     private boolean terminated;
 
     public Loan(LibraryUser loanTaker, Book book, LocalDate loanDate, boolean terminated) {
@@ -94,15 +99,15 @@ public class Loan {
         // get loan date + maxloandays
         // compare with current date
 
-if (isTerminated())
-    return false;
-else{
-    LocalDate overdueDate = loanDate.plusDays(book.getMaxLoanDays());
-    LocalDate now = LocalDate.now();
-    return now.isAfter(overdueDate);
+        if (isTerminated())
+            return false;
+        else {
+            LocalDate overdueDate = loanDate.plusDays(book.getMaxLoanDays());
+            LocalDate now = LocalDate.now();
+            return now.isAfter(overdueDate);
 
 
-}
+        }
 /*        Book book = new Book();
          book.setMaxLoanDays(7);
         loanDate = LocalDate.parse("2021-04-20");

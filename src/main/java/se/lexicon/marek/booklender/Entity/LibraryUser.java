@@ -3,7 +3,7 @@ package se.lexicon.marek.booklender.Entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
-
+@Entity
 public class LibraryUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
