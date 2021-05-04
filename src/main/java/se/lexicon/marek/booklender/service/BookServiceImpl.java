@@ -9,7 +9,10 @@ import se.lexicon.marek.booklender.Repository.BookRepository;
 import se.lexicon.marek.booklender.dto.BookDto;
 import se.lexicon.marek.booklender.dto.LibraryUserDto;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -28,26 +31,41 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookDto> findByReserved(boolean reserved) {
-        return null;
+        List<Book> books = bookRepository.findByReserved(reserved);
+        List<BookDto> bookDtos = books.stream().map(book -> modelMapper.map(book, BookDto.class)).collect(Collectors.toList());
+        return bookDtos;
     }
 
     @Override
     public List<BookDto> findByAvailable(boolean available) {
-        return null;
+        List<Book> books = bookRepository.findByAvailable(available);
+        List<BookDto> bookDtos = books.stream().map(book -> modelMapper.map(book, BookDto.class)).collect(Collectors.toList());
+        return bookDtos;
     }
 
     @Override
     public List<BookDto> findByTitle(String title) {
-        return null;
+        List<Book> books = bookRepository.findByTitle(title);
+        List<BookDto> bookDtos = books.stream().map(book -> modelMapper.map(book, BookDto.class)).collect(Collectors.toList());
+        return bookDtos;
     }
 
     @Override
     public BookDto findById(int bookId) {
+        if (bookId == 0) throw new IllegalArgumentException("");
+        Optional<Book> optional = bookRepository.findById(bookId);
+        if (optional.isPresent()) {
+            BookDto dto = modelMapper.map(optional, BookDto.class);
+            return dto;
+        }
         return null;
     }
 
     @Override
     public List<BookDto> findAll() {
+        List<Book> books = new ArrayList<>();
+        bookRepository.findAll().iterator().forEachRemaining(books::add);
+        List<BookDto> bookDtos = books.stream().map(book -> modelMapper.map(book, BookDto.class)).collect(Collectors.toList());
         return null;
     }
 
@@ -63,11 +81,22 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto update(BookDto bookDto) {
+        if (bookDto == null) throw new IllegalArgumentException("");
+        if (bookDto.getBookId() == 0) throw new IllegalArgumentException("");
+        Optional<Book> optional = bookRepository.findById(bookDto.getBookId());
+        if (optional.isPresent())
+            return modelMapper.map(bookRepository.save(modelMapper.map(bookDto, Book.class)), BookDto.class);
         return null;
     }
 
     @Override
     public boolean delete(int bookId) {
+        if (bookId == 0) throw new IllegalArgumentException("");
+        Optional<Book> optional = bookRepository.findById(bookId);
+        if (optional.isPresent()) {
+            bookRepository.deleteById(bookId);
+            return true;
+        }
         return false;
     }
 }

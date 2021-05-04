@@ -39,7 +39,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
         }
     }
 
-    //todo:--------------------
+
     @Override
     public LibraryUserDto findByEmail(String email) {
         if (email == null) throw new IllegalArgumentException("email should not be null");
@@ -94,7 +94,6 @@ public class LibraryUserServiceImpl implements LibraryUserService {
             libraryUserRepository.deleteById(userId);
             return true;
         }
-
         return false;
     }
 }

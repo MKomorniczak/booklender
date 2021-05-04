@@ -3,12 +3,14 @@ package se.lexicon.marek.booklender.Repository;
 import org.springframework.data.repository.CrudRepository;
 import se.lexicon.marek.booklender.Entity.Book;
 
+import java.util.List;
+
 public interface BookRepository extends CrudRepository<Book, Integer> {
 
-    Book findByReserved(boolean reserved);
+    List<Book> findByReserved(boolean reserved);
 
-    Book findByAvailable(boolean available);
+    List<Book> findByAvailable(boolean available);
 
-    Book findByTitle(String title);
+    List<Book> findByTitle(String title);
 
 }
