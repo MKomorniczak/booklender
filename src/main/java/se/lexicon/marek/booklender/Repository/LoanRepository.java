@@ -3,11 +3,14 @@ package se.lexicon.marek.booklender.Repository;
 import org.springframework.data.repository.CrudRepository;
 import se.lexicon.marek.booklender.Entity.Loan;
 
+import java.util.List;
+
 public interface LoanRepository extends CrudRepository<Loan, Long> {
-    Loan findByLoanTaker_UserId(int userId);
+    List<Loan> findByLoanTaker_UserId(int userId);
 
-    Loan findByBook_BookId(int bookId);
+    //Loan findByBook_BookId(int bookId);
+    List<Loan> findAllByBookBookId(int bookId);
 
-    Loan findByTerminated(boolean terminated);
+    List<Loan> findByTerminated(boolean terminated);
 
 }

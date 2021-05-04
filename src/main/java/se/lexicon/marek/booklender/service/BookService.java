@@ -19,6 +19,6 @@ public interface BookService {
 
     BookDto update(BookDto bookDto);
 
-    //todo: void delete
+
     boolean delete(int bookId);
 }

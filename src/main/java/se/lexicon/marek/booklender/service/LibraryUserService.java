@@ -15,7 +15,7 @@ public interface LibraryUserService {
 
     LibraryUserDto update(LibraryUserDto libraryUserDto);
 
-    //todo: void delete
+
     boolean delete(int userId);
 
 }

@@ -8,19 +8,19 @@ import java.util.Objects;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+
     private int bookId;
-    @Column(nullable = false)
+
     private String title;
-    @Column(nullable = false)
+
     private boolean available;
-    @Column(nullable = false)
+
     private boolean reserved;
-    @Column(nullable = false)
+
     private int maxLoanDays;
-    @Column(nullable = false)
+
     private BigDecimal finePerDay;
-    @Column(nullable = false)
+
     private String description;
 
     public Book(String title, int maxLoanDays, BigDecimal finePerDay, String description) {

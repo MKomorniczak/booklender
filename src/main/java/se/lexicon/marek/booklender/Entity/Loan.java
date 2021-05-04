@@ -9,17 +9,14 @@ import java.util.Objects;
 public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private long loanId;
     @ManyToOne(cascade = CascadeType.ALL)
-    @Column(nullable = false)
     private LibraryUser loanTaker;
     @ManyToOne(cascade = CascadeType.ALL)
-    @Column(nullable = false)
     private Book book;
     @Column(nullable = false)
     private LocalDate loanDate;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "_terminated")
     private boolean terminated;
 
     public Loan(LibraryUser loanTaker, Book book, LocalDate loanDate, boolean terminated) {

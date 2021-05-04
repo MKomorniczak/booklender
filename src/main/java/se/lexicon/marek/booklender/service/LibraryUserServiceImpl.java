@@ -7,8 +7,10 @@ import se.lexicon.marek.booklender.Entity.LibraryUser;
 import se.lexicon.marek.booklender.Repository.LibraryUserRepository;
 import se.lexicon.marek.booklender.dto.LibraryUserDto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class LibraryUserServiceImpl implements LibraryUserService {
@@ -37,18 +39,27 @@ public class LibraryUserServiceImpl implements LibraryUserService {
         }
     }
 
+    //todo:--------------------
     @Override
     public LibraryUserDto findByEmail(String email) {
-        if (email == null)  throw new IllegalArgumentException("");
-        LibraryUser libraryUser = libraryUserRepository.findByEmail(email);
-        LibraryUserDto dto = modelMapper.map(libraryUser, LibraryUserDto.class);
-        return dto;
+        if (email == null) throw new IllegalArgumentException("email should not be null");
+        Optional<LibraryUser> optional = libraryUserRepository.findByEmail(email);
+        if (optional.isPresent()) {
+            LibraryUserDto dto = modelMapper.map(optional.get(), LibraryUserDto.class);
+            return dto;
+        } else {
+            return null;
         }
+
+    }
 
 
     @Override
     public List<LibraryUserDto> findAll() {
-        return null;
+        List<LibraryUser> libraryUserList = new ArrayList<>();
+        libraryUserRepository.findAll().iterator().forEachRemaining(libraryUserList::add);
+        List<LibraryUserDto> libraryUserDtos = libraryUserList.stream().map(libraryUser -> modelMapper.map(libraryUser, LibraryUserDto.class)).collect(Collectors.toList());
+        return libraryUserDtos;
     }
 
     @Override
@@ -77,6 +88,13 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 
     @Override
     public boolean delete(int userId) {
+        if (userId == 0) throw new IllegalArgumentException("");
+        Optional<LibraryUser> optional = libraryUserRepository.findById(userId);
+        if (optional.isPresent()) {
+            libraryUserRepository.deleteById(userId);
+            return true;
+        }
+
         return false;
     }
 }

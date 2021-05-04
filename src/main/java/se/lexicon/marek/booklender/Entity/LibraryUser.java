@@ -7,7 +7,7 @@ import java.util.Objects;
 public class LibraryUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+
     private int userId;
 
     @Column(nullable = false)

@@ -5,11 +5,11 @@ import se.lexicon.marek.booklender.dto.LoanDto;
 import java.util.List;
 
 public interface LoanService {
-    LoanDto findById(int loanId);
+    LoanDto findById(long loanId);
 
     List<LoanDto> findByBookId(int bookId);
 
-    List<LoanDto> findByUserId(int bookId);
+    List<LoanDto> findByUserId(int userId);
 
     List<LoanDto> findByTerminated(boolean terminated);
 
@@ -19,6 +19,6 @@ public interface LoanService {
 
     LoanDto update(LoanDto loanDto);
 
-    //todo: void delete
-    boolean delete(int loanId);
+
+    boolean delete(long loanId);
 }
