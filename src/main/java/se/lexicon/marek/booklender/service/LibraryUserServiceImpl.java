@@ -3,8 +3,8 @@ package se.lexicon.marek.booklender.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import se.lexicon.marek.booklender.Entity.LibraryUser;
-import se.lexicon.marek.booklender.Repository.LibraryUserRepository;
+import se.lexicon.marek.booklender.entity.LibraryUser;
+import se.lexicon.marek.booklender.repository.LibraryUserRepository;
 import se.lexicon.marek.booklender.dto.LibraryUserDto;
 
 import java.util.ArrayList;

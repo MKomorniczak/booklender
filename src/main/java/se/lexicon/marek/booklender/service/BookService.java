@@ -11,6 +11,8 @@ public interface BookService {
 
     List<BookDto> findByTitle(String title);
 
+    List<BookDto> generalFind(String title, boolean reserved, boolean available);
+
     BookDto findById(int bookId);
 
     List<BookDto> findAll();

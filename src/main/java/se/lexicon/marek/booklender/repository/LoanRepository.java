@@ -1,7 +1,7 @@
-package se.lexicon.marek.booklender.Repository;
+package se.lexicon.marek.booklender.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import se.lexicon.marek.booklender.Entity.Loan;
+import se.lexicon.marek.booklender.entity.Loan;
 
 import java.util.List;
 

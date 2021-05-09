@@ -1,4 +1,4 @@
-package se.lexicon.marek.booklender.Entity;
+package se.lexicon.marek.booklender.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,7 +10,7 @@ public class LibraryUser {
 
     private int userId;
 
-    @Column(nullable = false)
+
     private LocalDate regDate;
 
     @Column(nullable = false)

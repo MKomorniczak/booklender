@@ -3,11 +3,9 @@ package se.lexicon.marek.booklender.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import se.lexicon.marek.booklender.Entity.Book;
-import se.lexicon.marek.booklender.Entity.LibraryUser;
-import se.lexicon.marek.booklender.Repository.BookRepository;
+import se.lexicon.marek.booklender.entity.Book;
+import se.lexicon.marek.booklender.repository.BookRepository;
 import se.lexicon.marek.booklender.dto.BookDto;
-import se.lexicon.marek.booklender.dto.LibraryUserDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +46,16 @@ public class BookServiceImpl implements BookService {
         List<Book> books = bookRepository.findByTitle(title);
         List<BookDto> bookDtos = books.stream().map(book -> modelMapper.map(book, BookDto.class)).collect(Collectors.toList());
         return bookDtos;
+
+
+    }
+
+    @Override
+    public List<BookDto> generalFind(String title, boolean reserved, boolean available) {
+        if (title != null) return findByTitle(title);
+        else if (reserved != false) return findByReserved(reserved);
+        else if (available != false) return findByAvailable(available);
+        else return findAll();
     }
 
     @Override

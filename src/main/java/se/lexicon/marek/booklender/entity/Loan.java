@@ -1,4 +1,4 @@
-package se.lexicon.marek.booklender.Entity;
+package se.lexicon.marek.booklender.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
