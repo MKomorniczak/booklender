@@ -29,13 +29,13 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 
     @Override
     public LibraryUserDto findById(int userId) {
-        if (userId == 0) throw new IllegalArgumentException("");
+        if (userId == 0) throw new IllegalArgumentException("userId should not be 0");
         Optional<LibraryUser> optional = libraryUserRepository.findById(userId);
         if (optional.isPresent()) {
             LibraryUserDto dto = modelMapper.map(optional.get(), LibraryUserDto.class);
             return dto;
         } else {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("object is not found");
         }
     }
 

@@ -31,7 +31,7 @@ public class LibraryUserController {
         return ResponseEntity.ok(libraryUserService.findById(userId));
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<LibraryUserDto> findByEmail(@PathVariable("email") String email) {
         return ResponseEntity.ok(libraryUserService.findByEmail(email));
 

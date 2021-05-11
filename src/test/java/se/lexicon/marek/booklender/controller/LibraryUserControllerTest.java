@@ -2,7 +2,6 @@ package se.lexicon.marek.booklender.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import se.lexicon.marek.booklender.dto.LibraryUserDto;
-
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -62,7 +60,7 @@ public class LibraryUserControllerTest {
         mockMvc.perform(
                 post("/api/v1/libraryUser/")
                         .content("{\n" +
-                                "    \"name\" : \"Dominika\"\n" +
+                                "    \"name\" : \"Dominika\",\n" +
                                 "    \"email\" : \"asd12@gmail.com\"\n" +
                                 "}")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
@@ -98,13 +96,14 @@ public class LibraryUserControllerTest {
     @DisplayName("get all ")
     public void test_find_all_size_1() throws Exception {
         mockMvc.perform(get("/api/v1/libraryUser/")
-        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].name", is("Marek")))
                 .andReturn();
     }
+
     @Test
     @DisplayName("delete by id, size 0")
     public void test_delete_by_id_check_size_0() throws Exception {
